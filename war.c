@@ -15,19 +15,40 @@
 // ============================================================================
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
-
+#include <stdio.h>
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
-
+#define MAX_TERRITORIOS 6 // Número de territórios
+#define MAX_NOME 30 // Tamanho máximo do nome do território
+#define MAX_COR 20 // Tamanho máximo da cor do exército
+#define MAX_MISSOES 3 // Quantidade de missões possíveis
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
-
+typedef struct {
+char nome [MAX_NOME]; // Nome do território
+char cor [MAX_COR]; // Cor do exército 
+int tropas; // Número de tropass no território
+} Territorio;
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
 // Funções de setup e gerenciamento de memória:
+Territorio* alocarMapa(int tamanho);
+void inicializarTerritorios(Territorio* mapa, int tamanho);
+void liberarMemoria(Territorio* mapa);
+
 // Funções de interface com o usuário:
+void exibirMenuPrincipal();
+void exibirMapa(const Territorio* mapa, int tamanho);
+void exibirMissao(int missaoID);
+
 // Funções de lógica principal do jogo:
+void faseDeAtaque(Territorio* mapa, int tamanho);
+void simularAtaque(Territorio* origem, Territorio* destino);
+int sortearMissao();
+int verificarVitoria(const Territorio* mapa, int missaoID);
+
 // Função utilitária:
+void limparBufferEntrada();
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
